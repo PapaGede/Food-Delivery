@@ -1,5 +1,6 @@
 package com.carrotinstitutefooddelivery.model;
 
+import com.carrotinstitutefooddelivery.constant.OrderStatus;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -35,4 +36,5 @@ public class Order {
 
     private LocalDateTime orderDateTime;
     private Double totalPrice;
+    private OrderStatus orderStatus;
 }

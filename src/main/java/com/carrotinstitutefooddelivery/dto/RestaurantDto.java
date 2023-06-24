@@ -15,4 +15,5 @@ public class RestaurantDto {
     private UUID restaurantId;
     private String name;
     private String address;
+    private String contact;
 }

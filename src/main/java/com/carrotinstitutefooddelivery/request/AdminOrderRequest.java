@@ -1,21 +1,18 @@
 package com.carrotinstitutefooddelivery.request;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRequest {
-    @NotEmpty
-    private String userName;
-    @NotEmpty
-    private String email;
-    @NotEmpty
-    private String password;
+public class AdminOrderRequest {
+    private UUID orderId;
+    private String orderStatus;
 }

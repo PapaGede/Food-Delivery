@@ -1,14 +1,11 @@
 package com.carrotinstitutefooddelivery.filter;
 
-import com.carrotinstitutefooddelivery.constant.UserType;
-import com.carrotinstitutefooddelivery.exceptions.UnauthorizedException;
 import com.carrotinstitutefooddelivery.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,13 +24,14 @@ public class AuthFilter implements Filter {
         var token = httpRequest.getHeader("token");
         var urls = List.of("/api/auth/register", "/api/auth/login");
 
+
+
         if (urls.contains(httpRequest.getRequestURI())){
             chain.doFilter(request, response);
             return;
         }
 
         if (token==null || token.isEmpty()){
-            System.out.println("Error from here");
             httpResponse.setStatus(401);
             return;
         }

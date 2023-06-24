@@ -28,8 +28,7 @@ public class MenuItemController {
 
     @GetMapping("/menuItem")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Access token", required = true, dataTypeClass = String.class, paramType = "header"),
-            @ApiImplicitParam(name = "token", value = "User's email", required = true, dataTypeClass = String.class, paramType = "header")
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
     })
     public List<MenuItemDto> findAllMenuItems(@RequestHeader("token") String authorization){
 
@@ -38,17 +37,26 @@ public class MenuItemController {
     }
 
     @GetMapping("/menuItem/{menuItemId}")
-    public MenuItemDto findMenuItemById(@PathVariable UUID menuItemId){
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public MenuItemDto findMenuItemById(@PathVariable UUID menuItemId, @RequestHeader("token") String authorization){
         return menuItemService.findMenuItemById(menuItemId);
     }
 
     @PutMapping("/admin/menuItem/{menuItemId}")
-    public MenuItemDto updateMenuItem(@Valid @RequestBody MenuItemRequest menuItemRequest, @PathVariable UUID menuItemId){
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public MenuItemDto updateMenuItem(@Valid @RequestBody MenuItemRequest menuItemRequest, @PathVariable UUID menuItemId, @RequestHeader("token") String authorization){
         return menuItemService.updateMenuItem(menuItemRequest, menuItemId);
     }
 
     @DeleteMapping("/admin/menuItem/{menuItemId}")
-    public ResponseEntity<String>deleteMenuItem(@PathVariable UUID menuItemId){
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public ResponseEntity<String>deleteMenuItem(@PathVariable UUID menuItemId, @RequestHeader("token") String authorization){
         menuItemService.deleteMenuItemById(menuItemId);
         return ResponseEntity.ok("Menu Item with ID "+ menuItemId + " has been deleted successfully");
     }

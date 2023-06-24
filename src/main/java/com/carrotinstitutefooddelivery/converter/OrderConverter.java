@@ -2,8 +2,10 @@ package com.carrotinstitutefooddelivery.converter;
 
 import com.carrotinstitutefooddelivery.dto.OrderDto;
 import com.carrotinstitutefooddelivery.dto.OrderItemDto;
+import com.carrotinstitutefooddelivery.dto.UserDto;
 import com.carrotinstitutefooddelivery.model.Order;
 import com.carrotinstitutefooddelivery.model.OrderItem;
+import com.carrotinstitutefooddelivery.model.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +20,8 @@ public class OrderConverter {
                 .orderCreateTime(order.getOrderDateTime())
                 .totalPrice(order.getTotalPrice())
                 .orderItems(order.getOrderItems().stream().map(OrderConverter::orderItemEntityToDto).collect(Collectors.toList()))
+                .userDto(userEntityToDto(order.getUser()))
+                .orderStatus(order.getOrderStatus().toString())
                 .build();
     }
 
@@ -26,6 +30,13 @@ public class OrderConverter {
                 .orderItemId(orderItem.getOrderItemId())
                 .quantity(orderItem.getQuantity())
                 .menuItemDto(menuItemEntityToDto(orderItem.getMenuItem()))
+                .build();
+    }
+
+    private static UserDto userEntityToDto(User user){
+        return UserDto.builder()
+                .userName(user.getUserName())
+                .userId(user.getUserId())
                 .build();
     }
 }

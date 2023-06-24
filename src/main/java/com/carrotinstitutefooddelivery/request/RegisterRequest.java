@@ -18,6 +18,4 @@ public class RegisterRequest {
     private String email;
     @NotEmpty
     private String password;
-    @NotEmpty
-    private String reEnterPassword;
 }

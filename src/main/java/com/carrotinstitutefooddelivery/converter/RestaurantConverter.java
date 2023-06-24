@@ -9,6 +9,7 @@ public class RestaurantConverter {
                 .restaurantId(restaurant.getRestaurantId())
                 .name(restaurant.getName())
                 .address(restaurant.getAddress())
+                .contact(restaurant.getContact())
                 .build();
     }
 }

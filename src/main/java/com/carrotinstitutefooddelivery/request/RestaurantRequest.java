@@ -16,4 +16,6 @@ public class RestaurantRequest {
     private String name;
     @NotEmpty
     private String address;
+    @NotEmpty
+    private String contact;
 }

@@ -21,4 +21,6 @@ public class OrderDto {
     private LocalDateTime orderCreateTime;
     private Double totalPrice;
     private List<OrderItemDto>orderItems;
+    private UserDto userDto;
+    private String orderStatus;
 }

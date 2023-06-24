@@ -29,6 +29,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         var restaurantEntity = Restaurant.builder()
                 .name(request.getName())
                 .address(request.getAddress())
+                .contact(request.getContact())
                 .build();
         var savedRestaurant = restaurantRepository.save(restaurantEntity);
 
@@ -56,6 +57,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .orElseThrow(()->new ResourceNotFoundException("Cannot find restaurant with id: "+ restaurantId));
         restaurant.setName(request.getName());
         restaurant.setAddress(request.getAddress());
+        restaurant.setContact(request.getContact());
         return restaurantEntityToDto(restaurantRepository.save(restaurant));
     }
 

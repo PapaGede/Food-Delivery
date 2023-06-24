@@ -3,6 +3,8 @@ package com.carrotinstitutefooddelivery.controller;
 import com.carrotinstitutefooddelivery.dto.RestaurantDto;
 import com.carrotinstitutefooddelivery.request.RestaurantRequest;
 import com.carrotinstitutefooddelivery.service.RestaurantService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,32 +17,47 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/restaurants")
+@RequestMapping("/api")
 public class RestaurantController {
     private final RestaurantService restaurantService;
 
-    @PostMapping
-    public RestaurantDto saveRestaurant(@Valid @RequestBody RestaurantRequest request){
+    @PostMapping("/admin/restaurants")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public RestaurantDto saveRestaurant(@Valid @RequestBody RestaurantRequest request, @RequestHeader("token") String authorization){
         return restaurantService.saveRestaurant(request);
     }
 
-    @GetMapping
-    public List<RestaurantDto> findAllRestaurants(){
+    @GetMapping("/restaurants")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public List<RestaurantDto> findAllRestaurants(@RequestHeader("token") String authorization){
         return restaurantService.findAllRestaurants();
     }
 
-    @GetMapping("/{restaurantId}")
-    public RestaurantDto findRestaurantById(@PathVariable UUID restaurantId){
+    @GetMapping("/restaurants/{restaurantId}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public RestaurantDto findRestaurantById(@PathVariable UUID restaurantId, @RequestHeader("token") String authorization){
         return restaurantService.findRestaurantById(restaurantId);
     }
 
-    @PutMapping("/{restaurantId}")
-    public RestaurantDto updateRestaurant(@Valid @RequestBody RestaurantRequest request, @PathVariable UUID restaurantId){
+    @PutMapping("/admin/restaurants/{restaurantId}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public RestaurantDto updateRestaurant(@Valid @RequestBody RestaurantRequest request, @PathVariable UUID restaurantId, @RequestHeader("token") String authorization){
         return restaurantService.updateRestaurant(request, restaurantId);
     }
 
-    @DeleteMapping("/{restaurantId}")
-    public ResponseEntity<String> deleteRestaurantById(@PathVariable UUID restaurantId){
+    @DeleteMapping("/admin/restaurants/{restaurantId}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public ResponseEntity<String> deleteRestaurantById(@PathVariable UUID restaurantId, @RequestHeader("token") String authorization){
         restaurantService.deleteRestaurantById(restaurantId);
         return ResponseEntity.ok("Restaurant with ID "+ restaurantId + " has been deleted successfully");
     }

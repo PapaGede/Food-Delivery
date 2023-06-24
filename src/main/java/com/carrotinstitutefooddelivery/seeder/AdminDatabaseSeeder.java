@@ -1,7 +1,6 @@
 package com.carrotinstitutefooddelivery.seeder;
 
 import com.carrotinstitutefooddelivery.constant.UserType;
-import com.carrotinstitutefooddelivery.exceptions.DuplicateEmailException;
 import com.carrotinstitutefooddelivery.model.User;
 import com.carrotinstitutefooddelivery.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
