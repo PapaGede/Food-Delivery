@@ -26,4 +26,6 @@
 
 An admin is already created in the AdminDatabaseSeeder.java file and can be changed in the code. Log in with this admin and capture the token since it's used in all the endpoints to validate. 
 
+In the application.properties, fill in the configurations for connecting to postman
+
 ![image](https://github.com/PapaGede/Food-Delivery/assets/49786086/72ae808f-51c2-4008-9818-334d5eb29b61)
