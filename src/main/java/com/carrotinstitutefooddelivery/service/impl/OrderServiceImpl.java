@@ -68,10 +68,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> findAllOrders(String token) {
         var user = userRepository.findUserByToken(token).get();
+
         if (user.getUserType().equals(UserType.ADMIN)) {
             return orderRepository.findAll().stream().map(OrderConverter::orderEntityToDto).collect(Collectors.toList());
         }
-        return orderRepository.findAll().stream().map(OrderConverter::orderEntityToDto)
+
+        return orderRepository.findAll().stream()
+                .map(OrderConverter::orderEntityToDto)
                 .filter(item-> item.getUserDto().getUserName().equals(user.getUserName()))
                 .collect(Collectors.toList());
     }

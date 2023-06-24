@@ -34,9 +34,13 @@ public class OrderConverter {
     }
 
     private static UserDto userEntityToDto(User user){
+        if (user == null){
+            return null;
+        }
         return UserDto.builder()
                 .userName(user.getUserName())
                 .userId(user.getUserId())
+                .email(user.getEmail())
                 .build();
     }
 }

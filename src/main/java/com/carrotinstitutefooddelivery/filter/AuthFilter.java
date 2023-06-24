@@ -18,13 +18,10 @@ public class AuthFilter implements Filter {
     private final UserRepository userRepository;
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         var httpRequest = (HttpServletRequest)request;
         var httpResponse = (HttpServletResponse)response;
         var token = httpRequest.getHeader("token");
         var urls = List.of("/api/auth/register", "/api/auth/login");
-
-
 
         if (urls.contains(httpRequest.getRequestURI())){
             chain.doFilter(request, response);

@@ -22,7 +22,10 @@ public class MenuItemController {
     private final MenuItemService menuItemService;
 
     @PostMapping("/admin/menuItem")
-    public MenuItemDto saveMenuItem(@Valid @RequestBody MenuItemRequest menuItemRequest){
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
+    })
+    public MenuItemDto saveMenuItem(@Valid @RequestBody MenuItemRequest menuItemRequest, @RequestHeader("token") String authorization){
         return menuItemService.saveMenuItem(menuItemRequest);
     }
 
@@ -31,8 +34,6 @@ public class MenuItemController {
             @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
     })
     public List<MenuItemDto> findAllMenuItems(@RequestHeader("token") String authorization){
-
-        System.out.println(authorization);
         return menuItemService.findAllMenuItem();
     }
 

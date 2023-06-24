@@ -49,7 +49,7 @@ public class OrderController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "User's token", required = true, dataTypeClass = String.class, paramType = "header")
     })
-    public OrderDto updateOrderStatus(@Valid @RequestBody AdminOrderRequest request, String authorization){
+    public OrderDto updateOrderStatus(@Valid @RequestBody AdminOrderRequest request, @RequestHeader("token") String authorization){
         return orderService.updateOrderStatus(request);
     }
 }
